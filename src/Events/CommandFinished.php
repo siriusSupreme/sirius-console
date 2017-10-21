@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Console\Events;
+namespace Sirius\Console\Events;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

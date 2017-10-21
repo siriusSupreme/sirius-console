@@ -1,8 +1,9 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Scheduling;
 
 use Illuminate\Console\Command;
+use function Sirius\Support\collect;
 
 class ScheduleFinishCommand extends Command
 {
@@ -30,14 +31,15 @@ class ScheduleFinishCommand extends Command
     /**
      * The schedule instance.
      *
-     * @var \Illuminate\Console\Scheduling\Schedule
+     * @var \Sirius\Console\Scheduling\Schedule
      */
     protected $schedule;
 
     /**
      * Create a new command instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Sirius\Console\Scheduling\Schedule  $schedule
+     *
      * @return void
      */
     public function __construct(Schedule $schedule)
@@ -56,6 +58,6 @@ class ScheduleFinishCommand extends Command
     {
         collect($this->schedule->events())->filter(function ($value) {
             return $value->mutexName() == $this->argument('id');
-        })->each->callAfterCallbacks($this->laravel);
+        })->each->callAfterCallbacks($this->sirius);
     }
 }

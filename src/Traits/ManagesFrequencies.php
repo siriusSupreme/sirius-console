@@ -1,8 +1,8 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Traits;
 
-use Illuminate\Support\Carbon;
+use Sirius\Support\Carbon;
 
 trait ManagesFrequencies
 {

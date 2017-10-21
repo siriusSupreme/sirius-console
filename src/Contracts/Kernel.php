@@ -27,7 +27,7 @@ interface Kernel
      *
      * @param  string  $command
      * @param  array  $parameters
-     * @return \Illuminate\Foundation\Bus\PendingDispatch
+     * @return \Sirius\Bus\PendingDispatch
      */
     public function queue($command, array $parameters = []);
 

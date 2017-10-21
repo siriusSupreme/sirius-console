@@ -3,9 +3,9 @@
 namespace Illuminate\Console;
 
 use Closure;
-use Illuminate\Contracts\Events\Dispatcher;
+use Sirius\Event\Contracts\Dispatcher;
 use Symfony\Component\Process\ProcessUtils;
-use Illuminate\Contracts\Container\Container;
+use Sirius\Container\Contracts\Container;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
@@ -16,16 +16,16 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Illuminate\Contracts\Console\Application as ApplicationContract;
+use Sirius\Console\Contracts\Application as ApplicationContract;
 
 class Application extends SymfonyApplication implements ApplicationContract
 {
     /**
-     * The Laravel application instance.
+     * The Sirius application instance.
      *
-     * @var \Illuminate\Contracts\Container\Container
+     * @var \Sirius\Container\Contracts\Container
      */
-    protected $laravel;
+    protected $sirius;
 
     /**
      * The output from the previous command.
@@ -44,23 +44,24 @@ class Application extends SymfonyApplication implements ApplicationContract
     /**
      * The Event Dispatcher.
      *
-     * @var \Illuminate\Contracts\Events\Dispatcher
+     * @var \Sirius\Contracts\Events\Dispatcher
      */
     protected $events;
 
     /**
      * Create a new Artisan console application.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $laravel
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @param  \Sirius\Container\Contracts\Container  $sirius
+     * @param  \Sirius\Event\Contracts\Dispatcher  $events
      * @param  string  $version
+     *
      * @return void
      */
-    public function __construct(Container $laravel, Dispatcher $events, $version)
+    public function __construct(Container $sirius, Dispatcher $events, $version)
     {
-        parent::__construct('Laravel Framework', $version);
+        parent::__construct('Sirius Framework', $version);
 
-        $this->laravel = $laravel;
+        $this->sirius = $sirius;
         $this->events = $events;
         $this->setAutoExit(false);
         $this->setCatchExceptions(false);
@@ -200,7 +201,7 @@ class Application extends SymfonyApplication implements ApplicationContract
     public function add(SymfonyCommand $command)
     {
         if ($command instanceof Command) {
-            $command->setLaravel($this->laravel);
+            $command->setSirius($this->sirius);
         }
 
         return $this->addToParent($command);
@@ -225,7 +226,7 @@ class Application extends SymfonyApplication implements ApplicationContract
      */
     public function resolve($command)
     {
-        return $this->add($this->laravel->make($command));
+        return $this->add($this->sirius->make($command));
     }
 
     /**
@@ -272,12 +273,12 @@ class Application extends SymfonyApplication implements ApplicationContract
     }
 
     /**
-     * Get the Laravel application instance.
+     * Get the Sirius application instance.
      *
      * @return \Illuminate\Contracts\Foundation\Application
      */
-    public function getLaravel()
+    public function getSirius()
     {
-        return $this->laravel;
+        return $this->sirius;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Console;
+namespace Sirius\Console;
 
 use Sirius\Support\Str;
 use InvalidArgumentException;

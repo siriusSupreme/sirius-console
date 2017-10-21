@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Console;
+namespace Sirius\Console\Traits;
 
 use Closure;
 
@@ -48,7 +48,7 @@ trait ConfirmableTrait
     protected function getDefaultConfirmCallback()
     {
         return function () {
-            return $this->getLaravel()->environment() == 'production';
+            return $this->getSirius()->environment() == 'production';
         };
     }
 }

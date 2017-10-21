@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Console;
+namespace Sirius\Console;
 
 use Sirius\Support\Contracts\Arrayable;
 use Symfony\Component\Console\Helper\Table;
@@ -16,11 +16,11 @@ use Symfony\Component\Console\Command\Command as SymfonyCommand;
 class Command extends SymfonyCommand
 {
     /**
-     * The Laravel application instance.
+     * The Sirius application instance.
      *
      * @var \Illuminate\Contracts\Foundation\Application
      */
-    protected $laravel;
+    protected $sirius;
 
     /**
      * The input interface implementation.
@@ -32,7 +32,7 @@ class Command extends SymfonyCommand
     /**
      * The output interface implementation.
      *
-     * @var \Illuminate\Console\OutputStyle
+     * @var \Sirius\Console\OutputStyle
      */
     protected $output;
 
@@ -177,7 +177,7 @@ class Command extends SymfonyCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        return $this->laravel->call([$this, 'handle']);
+        return $this->sirius->call([$this, 'handle']);
     }
 
     /**
@@ -554,23 +554,24 @@ class Command extends SymfonyCommand
     }
 
     /**
-     * Get the Laravel application instance.
+     * Get the Sirius application instance.
      *
      * @return \Illuminate\Contracts\Foundation\Application
      */
-    public function getLaravel()
+    public function getSirius()
     {
-        return $this->laravel;
+        return $this->sirius;
     }
 
     /**
-     * Set the Laravel application instance.
+     * Set the Sirius application instance.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $laravel
+     * @param  \Sirius\Contracts\Container\Container  $sirius
+     *
      * @return void
      */
-    public function setLaravel($laravel)
+    public function setSirius($sirius)
     {
-        $this->laravel = $laravel;
+        $this->sirius = $sirius;
     }
 }

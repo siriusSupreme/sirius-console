@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Console;
+namespace Sirius\Console\Traits;
 
 use Sirius\Container\Container;
 

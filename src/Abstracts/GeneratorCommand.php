@@ -1,9 +1,10 @@
 <?php
 
-namespace Illuminate\Console;
+namespace Sirius\Console\Abstracts;
 
-use Illuminate\Support\Str;
-use Illuminate\Filesystem\Filesystem;
+use Sirius\Console\Command;
+use Sirius\Support\Str;
+use Sirius\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputArgument;
 
 abstract class GeneratorCommand extends Command
@@ -127,7 +128,7 @@ abstract class GeneratorCommand extends Command
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
+        return $this->sirius['path'].'/'.str_replace('\\', '/', $name).'.php';
     }
 
     /**
@@ -218,7 +219,7 @@ abstract class GeneratorCommand extends Command
      */
     protected function rootNamespace()
     {
-        return $this->laravel->getNamespace();
+        return $this->sirius->getNamespace();
     }
 
     /**

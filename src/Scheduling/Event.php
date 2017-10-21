@@ -1,15 +1,16 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Scheduling;
 
 use Closure;
 use Cron\CronExpression;
-use Illuminate\Support\Carbon;
+use Sirius\Console\Traits\ManagesFrequencies;
+use Sirius\Support\Carbon;
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Contracts\Mail\Mailer;
+use Sirius\Macro\Traits\Macroable;
 use Symfony\Component\Process\Process;
-use Illuminate\Support\Traits\Macroable;
-use Illuminate\Contracts\Container\Container;
+use Sirius\Container\Contracts\Container;
 
 class Event
 {
@@ -130,14 +131,14 @@ class Event
     /**
      * The mutex implementation.
      *
-     * @var \Illuminate\Console\Scheduling\Mutex
+     * @var \Sirius\Console\Contracts\Mutex
      */
     public $mutex;
 
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Mutex  $mutex
+     * @param  \Sirius\Console\Contracts\Mutex  $mutex
      * @param  string  $command
      * @return void
      */
@@ -665,7 +666,7 @@ class Event
     /**
      * Set the mutex implementation to be used.
      *
-     * @param  \Illuminate\Console\Scheduling\Mutex  $mutex
+     * @param  \Sirius\Console\Contracts\Mutex  $mutex
      * @return $this
      */
     public function preventOverlapsUsing(Mutex $mutex)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Scheduling;
 
 use Illuminate\Console\Command;
 
@@ -49,14 +49,14 @@ class ScheduleRunCommand extends Command
     {
         $eventsRan = false;
 
-        foreach ($this->schedule->dueEvents($this->laravel) as $event) {
-            if (! $event->filtersPass($this->laravel)) {
+        foreach ($this->schedule->dueEvents($this->sirius) as $event) {
+            if (! $event->filtersPass($this->sirius)) {
                 continue;
             }
 
             $this->line('<info>Running scheduled command:</info> '.$event->getSummaryForDisplay());
 
-            $event->run($this->laravel);
+            $event->run($this->sirius);
 
             $eventsRan = true;
         }

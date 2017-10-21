@@ -1,8 +1,9 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Scheduling;
 
 use Illuminate\Console\Application;
+use function Sirius\Support\windows_os;
 use Symfony\Component\Process\ProcessUtils;
 
 class CommandBuilder
@@ -10,7 +11,8 @@ class CommandBuilder
     /**
      * Build the command for the given event.
      *
-     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @param  \Sirius\Console\Scheduling\Event  $event
+     *
      * @return string
      */
     public function buildCommand(Event $event)
@@ -25,7 +27,8 @@ class CommandBuilder
     /**
      * Build the command for running the event in the foreground.
      *
-     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @param  \Sirius\Console\Scheduling\Event  $event
+     *
      * @return string
      */
     protected function buildForegroundCommand(Event $event)
@@ -40,7 +43,8 @@ class CommandBuilder
     /**
      * Build the command for running the event in the background.
      *
-     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @param  \Sirius\Console\Scheduling\Event  $event
+     *
      * @return string
      */
     protected function buildBackgroundCommand(Event $event)
@@ -60,8 +64,9 @@ class CommandBuilder
     /**
      * Finalize the event's command syntax with the correct user.
      *
-     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @param  \Sirius\Console\Scheduling\Event  $event
      * @param  string  $command
+     *
      * @return string
      */
     protected function ensureCorrectUser(Event $event, $command)

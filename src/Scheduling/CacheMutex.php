@@ -1,8 +1,9 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Scheduling;
 
 use Illuminate\Contracts\Cache\Repository as Cache;
+use Sirius\Console\Contracts\Mutex;
 
 class CacheMutex implements Mutex
 {
@@ -27,7 +28,8 @@ class CacheMutex implements Mutex
     /**
      * Attempt to obtain a mutex for the given event.
      *
-     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @param  \Sirius\Console\Scheduling\Event  $event
+     *
      * @return bool
      */
     public function create(Event $event)
@@ -40,7 +42,8 @@ class CacheMutex implements Mutex
     /**
      * Determine if a mutex exists for the given event.
      *
-     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @param  \Sirius\Console\Scheduling\Event  $event
+     *
      * @return bool
      */
     public function exists(Event $event)

@@ -1,10 +1,11 @@
 <?php
 
-namespace Illuminate\Console\Scheduling;
+namespace Sirius\Console\Scheduling;
 
 use LogicException;
 use InvalidArgumentException;
-use Illuminate\Contracts\Container\Container;
+use Sirius\Console\Contracts\Mutex;
+use Sirius\Container\Contracts\Container;
 
 class CallbackEvent extends Event
 {
@@ -25,7 +26,7 @@ class CallbackEvent extends Event
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Mutex  $mutex
+     * @param  \Sirius\Console\Contracts\Mutex  $mutex
      * @param  string  $callback
      * @param  array  $parameters
      * @return void
@@ -48,7 +49,8 @@ class CallbackEvent extends Event
     /**
      * Run the given event.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @param  \Sirius\Container\Contracts\Container  $container
+     *
      * @return mixed
      *
      * @throws \Exception
