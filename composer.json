@@ -17,13 +17,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "guzzlehttp/guzzle": "^6.3",
-    "mtdowling/cron-expression": "^1.2",
-    "siriussupreme/sirius-container": "^1.0",
-    "siriussupreme/sirius-filesystem": "^1.0",
-    "siriussupreme/sirius-support": "^1.0",
-    "symfony/console": "^3.3",
-    "symfony/process": "^3.3"
+    "psr/log": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.4"

@@ -192,16 +192,6 @@ class Application
         } catch (\Throwable $e) {
         }
         if (null !== $e) {
-            if (null !== $this->dispatcher) {
-                $event = new ConsoleErrorEvent($input, $output, $e);
-                $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
-                $e = $event->getError();
-
-                if (0 === $event->getExitCode()) {
-                    return 0;
-                }
-            }
-
             throw $e;
         }
 
@@ -881,47 +871,22 @@ class Application
             // ignore invalid options/arguments for now, to allow the event listeners to customize the InputDefinition
         }
 
-        $event = new ConsoleCommandEvent($command, $input, $output);
         $e = null;
 
         try {
-            $this->dispatcher->dispatch(ConsoleEvents::COMMAND, $event);
-
-            if ($event->commandShouldRun()) {
-                $exitCode = $command->run($input, $output);
-            } else {
-                $exitCode = ConsoleCommandEvent::RETURN_CODE_DISABLED;
-            }
+          $exitCode = $command->run($input, $output);
         } catch (\Exception $e) {
         } catch (\Throwable $e) {
         }
         if (null !== $e) {
-            if ($this->dispatcher->hasListeners(ConsoleEvents::EXCEPTION)) {
-                $x = $e instanceof \Exception ? $e : new FatalThrowableError($e);
-                $event = new ConsoleExceptionEvent($command, $input, $output, $x, $x->getCode());
-                $this->dispatcher->dispatch(ConsoleEvents::EXCEPTION, $event);
-
-                if ($x !== $event->getException()) {
-                    $e = $event->getException();
-                }
-            }
-            $event = new ConsoleErrorEvent($input, $output, $e, $command);
-            $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
-            $e = $event->getError();
-
-            if (0 === $exitCode = $event->getExitCode()) {
-                $e = null;
-            }
+          throw $e;
         }
-
-        $event = new ConsoleTerminateEvent($command, $input, $output, $exitCode);
-        $this->dispatcher->dispatch(ConsoleEvents::TERMINATE, $event);
 
         if (null !== $e) {
             throw $e;
         }
 
-        return $event->getExitCode();
+        return $exitCode;
     }
 
     /**
